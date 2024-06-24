@@ -109,25 +109,23 @@ void loop() {
     respCount = 0;
 
     // Determinar el tipo de apnea según la frecuencia respiratoria y el sonido
-    if (respRate < 12) {
-      Serial.println("Tipo: Bradipnea");
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("Tipo: Bradipnea");
-    } else if (respRate > 20) {
-      Serial.println("Tipo: Taquipnea");
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("Tipo: Taquipnea");
-    } else {
-      Serial.println("Tipo: Normal");
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("Tipo: Normal");
-    }
-
-    delay(1000); // Actualizar cada segundo
-  }
+   String freqText;
+   if (respRate < 12) {
+     freqText = "Tipo: Bradipnea";
+   } else if (respRate > 20) {
+     freqText = "Tipo: Taquipnea";
+   } else {
+     freqText = "Tipo: Normal";
+   }
+   lcd.clear();
+   lcd.setCursor(0, 0);
+   lcd.print("Freq: ");
+   lcd.print(respRate);
+   lcd.print(" RPM");
+   lcd.setCursor(0, 1);
+   lcd.print(freqText);
+   delay(1000);
+ }
 }
 
 void calibrateThreshold() {
